@@ -19,6 +19,23 @@ const getCategoryProducts = async (req, res)=>{
        
 
 }
+const getProductById = async(req, res)=>{
+  
+     console.log("id", id); 
+      try{
+           const product = await Product.findById(id); 
+           return res.json({
+                status:201, 
+                product: product
+           })
+      }catch(err){
+          const errMsg = err.toString(); 
+          return res.json({
+             status: 501, 
+             msg: errMsg
+          })
+      }
+}
  const addProduct = async(req, res)=>{
       try{
            console.log(req.body); 
@@ -42,5 +59,6 @@ const getCategoryProducts = async (req, res)=>{
  } 
 module.exports = {
      getCategoryProducts,
-     addProduct
+     addProduct, 
+     getProductById
 }

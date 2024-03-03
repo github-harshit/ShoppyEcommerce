@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import axios from "axios"; 
+import {Link} from "react-router-dom"
 import { useSelector } from 'react-redux';
 const Products = () => {
      const [products, setProducts] = useState([]); 
@@ -9,7 +10,7 @@ const Products = () => {
     console.log(token); 
       useEffect(()=>{
          const getProducts = async()=>{
-           const res = await axios.get(`http://localhost:5000/products/${location}`, {
+           const res = await axios.get(`http://localhost:5000/products/category/${location}`, {
              headers: {
                "Authorization" : `Bearer ${token}`
              }
@@ -24,7 +25,7 @@ const Products = () => {
     <div className='flex flex-col gap-5'>
       <div className='flex  items-center flex-wrap gap-10 px-10'>
         {products.map((product, index)=>
-         <div key={index} className='w-[20rem] h-[26rem] flex flex-col items-center border border-black'> 
+         <Link key={index} to = {`/products/${product._id}`}><div className='w-[20rem] h-[26rem] flex flex-col items-center border border-black'> 
             <div className='w-full h-[20rem]'> 
             <img src={product.img} className='w-full h-full object-contain' />
             </div>
@@ -33,7 +34,7 @@ const Products = () => {
             <p> {product.desc}</p>
             <h3 className='font-bold'>{product.price} Rs</h3>
 
-         </div>
+         </div></Link>
 
         )}
       </div>

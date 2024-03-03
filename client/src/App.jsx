@@ -8,6 +8,7 @@ import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import {ToastContainer} from "react-toastify"; 
  
 import 'react-toastify/dist/ReactToastify.css';
+import ProductDesc from "./pages/ProductDesc/ProductDesc";
 function App() {
    
   return (
@@ -20,6 +21,7 @@ function App() {
          <Route path="/" element= {<PrivateRoute/>}>
            <Route path="" element= {<Home/>}/>
             <Route path="/categories/:category" element = {<Products/>}></Route>
+            <Route path="/products/:productId" element= {<ProductDesc/>}/>
          </Route>
        </Routes>
        <ToastContainer/> 
