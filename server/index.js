@@ -1,5 +1,6 @@
 const userRouter = require("./routes/userRoute");
-const productRouter  = require("./routes/productRoute")
+const productRouter  = require("./routes/productRoute");
+const cartRouter = require("./routes/cartRoute");
 const express = require("express"); 
 const app = express(); 
 const port = 5000; 
@@ -12,7 +13,8 @@ app.use(express.json());
 app.use(cors()); 
 app.use("/user", userRouter); 
 app.use("/products", productRouter); 
-
+app.use("/cart", cartRouter);
+ 
 
 mongoose.connect(process.env.MONGO_URL, {useNewUrlParser: true, useUnifiedTopology: true})
 .then(()=> console.log("MOngoDB connected"))

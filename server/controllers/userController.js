@@ -1,11 +1,8 @@
 const User = require("../models/userModel"); 
  const bcrypt = require("bcrypt"); 
  const jwt = require("jsonwebtoken"); 
+ const Cart = require("../models/cartModel"); 
  
- 
- 
-
-
 const signUp = async (req, res)=>{
      try{
         const {username, password, confirmPassword, email, gender, dob} = req.body; 
@@ -26,8 +23,14 @@ const signUp = async (req, res)=>{
                                dob
                             }); 
         const savedUser =  await user.save(); 
-        const payload = savedUser.email; 
-        const token = jwt.sign(payload,process.env.JWT_SECRET )
+        let cart  = await Cart.findOne({userid: savedUser.id}); 
+        if(!cart){
+             let newCart = new Cart({userId: savedUser.id, items: []});
+             await newCart.save(); 
+        }
+        const payload = {user:savedUser.id}; 
+        const token = jwt.sign(payload,process.env.JWT_SECRET ); 
+
 
             return res.json({
                 status:200, 
@@ -70,7 +73,13 @@ const signIn = async(req, res)=>{
         })
 
      }
-    const payload = user.email; 
+     const payload = { user: user.id };
+     let cart  = await Cart.findOne({userId: user.id}); 
+     if(!cart){
+          let newCart = new Cart({userId: user.id, items: []});
+          await newCart.save(); 
+     }
+     
     const token  = jwt.sign(payload, process.env.JWT_SECRET) ;
 
 

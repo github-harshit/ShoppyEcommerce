@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import axios from "axios"; 
+import axios from "../../utils/api/axios"; 
 import {Link} from "react-router-dom"
 import { useSelector } from 'react-redux';
 const Products = () => {
@@ -10,11 +10,7 @@ const Products = () => {
     console.log(token); 
       useEffect(()=>{
          const getProducts = async()=>{
-           const res = await axios.get(`http://localhost:5000/products/category/${location}`, {
-             headers: {
-               "Authorization" : `Bearer ${token}`
-             }
-           })
+           const res = await axios.get(`/products/category/${location}`)
            setProducts(res?.data?.products); 
 
          }

@@ -3,6 +3,7 @@ import SignIn from "./pages/SignIn/SignIn";
 import SignUp from "./pages/SignUp/SignUp";
 import Home from "./pages/Home/Home";
  import Admin from "./pages/Admin/Admin";
+ import Cart from "./pages/Cart/Cart";
 import Products from "./pages/Products/Products";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import {ToastContainer} from "react-toastify"; 
@@ -22,6 +23,7 @@ function App() {
            <Route path="" element= {<Home/>}/>
             <Route path="/categories/:category" element = {<Products/>}></Route>
             <Route path="/products/:productId" element= {<ProductDesc/>}/>
+            <Route path="/cart" element= {<Cart/>}/>
          </Route>
        </Routes>
        <ToastContainer/> 

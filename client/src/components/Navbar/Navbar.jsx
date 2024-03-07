@@ -7,6 +7,8 @@ import Popover from '@mui/material/Popover';
 import { FaBagShopping } from "react-icons/fa6";
 import { FaHeart } from "react-icons/fa6";
 import { FaUser } from "react-icons/fa6";
+import {Badge} from "@mui/material";
+ import { Link } from 'react-router-dom';
 
 const Navbar = () => {
    const dispatch = useDispatch(); 
@@ -43,14 +45,14 @@ const Navbar = () => {
         
         <div className='w-1/5'>
         <ul className='flex justify-center gap-3 md:gap-10 items-center'>
+            <Badge badgeContent= {2} color='primary'>
+                <Link to={"/cart"}>  <FaBagShopping size={"1.2rem"}/> </Link>
+            </Badge>
             <li>
-                <a> <FaBagShopping/> </a>
-            </li>
-            <li>
-                <a> <FaHeart/></a>
+                <Link to= {""}> <FaHeart size={"1.2rem"}/></Link>
             </li>
               <li onClick={handleClick} >
-                <a><FaUser/></a>
+                <a><FaUser size={"1.2rem"}/></a>
             </li>
               <Popover
         

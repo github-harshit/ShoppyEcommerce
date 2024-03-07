@@ -20,8 +20,8 @@ const getCategoryProducts = async (req, res)=>{
 
 }
 const getProductById = async(req, res)=>{
-  
-     console.log("id", id); 
+     const  id = req.params.productId; 
+    
       try{
            const product = await Product.findById(id); 
            return res.json({

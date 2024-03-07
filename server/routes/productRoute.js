@@ -4,11 +4,11 @@ const {jwtVerify} = require("../middlewares/verify");
 
 const router = express.Router(); 
 // get category products 
- router.get("/category/:category",  getCategoryProducts)
- // add product (admin) 
+ router.get("/category/:category", jwtVerify,  getCategoryProducts)
+ // add product (admin) different verification 
  router.post("/addProduct", addProduct)
 // get product by Id
-router.get("/:productId", getProductById)
+router.get("/:productId", jwtVerify, getProductById)
 
  // delet product (admin)
 
