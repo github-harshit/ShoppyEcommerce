@@ -7,8 +7,15 @@ const addProduct = async (req, res)=>{
         const {userId, productId, quantity}= req.body;
         
         let cart = await Cart.findOne({userId: req.user}); 
-      
-        cart.items.push({product: productId, quantity:quantity}); 
+        // first we will have to check if this product is already in the cart if it is 
+        // already there then we have to just increment the quantity of that product
+        const existingItem = cart.items.find(item => item.product.toString() === productId);
+        if(existingItem){
+         existingItem.quantity += quantity;
+        }else{
+           cart.items.push({product: productId, quantity:quantity}); 
+        }
+       
         await cart.save(); 
         return res.json({
              status: 201,

@@ -1,17 +1,22 @@
 import React, {useEffect, useState} from 'react'
-import axios from "../../utils/api/axios"
+import axios from "../../utils/api/axios"; 
+import { useDispatch, useSelector } from 'react-redux';
+import { removeProduct } from '../../redux/cartSlice';
 const Cart = () => {
-    const [cartData, setCartData] = useState([])
+    const [cartData, setCartData] = useState([]); 
+    const dispatch = useDispatch();
+    const user = useSelector((state)=> state.user.user)
+
   useEffect(()=>{
     const getProducts = async()=>{
-         const res = await axios.get(`/cart/65e96acf2c73d3e49441bc82`);
+         const res = await axios.get(`/cart/${user._id}`);
         setCartData(res?.data?.cart?.items); 
 
     }
      getProducts(); 
-  }, []);
+  },[] );
    const handleRemove = async (id)=>{
-    console.log(id)
+    dispatch(removeProduct(1)); 
      const res = await axios.delete(`/cart/remove/${id}`); 
      console.log(res.data)
     if(res.data.status==201){

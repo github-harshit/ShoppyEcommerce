@@ -2,9 +2,11 @@ import  {useState, useEffect} from 'react';
 import axios from "axios"; 
 import { useDispatch, useSelector } from 'react-redux';
 import { setToken } from '../../redux/authSlice';
+import { addUser } from '../../redux/userSlice';
  import { useNavigate } from 'react-router-dom';
  import {toast} from "react-toastify"; 
   import { Link } from 'react-router-dom';
+
 const SignIn = () => {
    const dispatch = useDispatch(); 
     const navigate = useNavigate(); 
@@ -37,6 +39,7 @@ const SignIn = () => {
     
           localStorage.setItem('token', response.data.token); 
           dispatch(setToken(response.data.token));
+          dispatch(addUser(response.data.user)); 
           console.log("Am I here ")
           navigate("/");  
         

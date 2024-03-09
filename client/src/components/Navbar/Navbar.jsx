@@ -9,10 +9,14 @@ import { FaHeart } from "react-icons/fa6";
 import { FaUser } from "react-icons/fa6";
 import {Badge} from "@mui/material";
  import { Link } from 'react-router-dom';
-
+import { removeUser } from '../../redux/userSlice';
+ 
 const Navbar = () => {
    const dispatch = useDispatch(); 
    const [anchorEl, setAnchorEl] = useState(); 
+    
+   const cartValue = useSelector((state)=> state.cart.cartValue);
+   console.log("cartValue", cartValue)
       const handleClick = (event) => {
        setAnchorEl(event.currentTarget);
      };
@@ -22,15 +26,18 @@ const Navbar = () => {
           
   const handleLogout  = ()=>{
     dispatch(removeToken()); 
+    dispatch(removeUser())
     localStorage.removeItem("token"); 
 
 }
+
+
     const open = Boolean(anchorEl);
   return (
     <div className='w-full h-16 flex justify-between items-center'>
          <div className=' w-1/3 md:w-1/5 h-full flex items-center justify-center gap-3 md:gap-10'>
             <img className=' w-[25%] md:w-[14%] h-[50%] md:h-[70%] object-cover' src={logo} alt='Logo'/>
-            <h1 className='font-bold text-xl'> Shoppy </h1>
+            <Link to={"/"}> <h1 className='font-bold text-xl'> Shoppy </h1></Link> 
          </div>
          <div className=' w-[40%] md:w-1/2 '>
 
@@ -45,7 +52,7 @@ const Navbar = () => {
         
         <div className='w-1/5'>
         <ul className='flex justify-center gap-3 md:gap-10 items-center'>
-            <Badge badgeContent= {2} color='primary'>
+            <Badge badgeContent= {cartValue} color='primary'>
                 <Link to={"/cart"}>  <FaBagShopping size={"1.2rem"}/> </Link>
             </Badge>
             <li>

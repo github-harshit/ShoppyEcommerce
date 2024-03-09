@@ -38,7 +38,7 @@ const getProductById = async(req, res)=>{
 }
  const addProduct = async(req, res)=>{
       try{
-           console.log(req.body); 
+      
      const {title, desc, img, category, size, color, price,inStock} = req.body;
       const newProduct = new Product({title, desc,img,category,size, color, price, inStock})
       const savedProduct = await newProduct.save(); 

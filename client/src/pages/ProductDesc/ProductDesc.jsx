@@ -3,7 +3,10 @@ import { useLocation } from 'react-router-dom';
 import { FaCartPlus } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 import axios from "../../utils/api/axios";
+import { useDispatch } from 'react-redux';
+import { addProduct } from '../../redux/cartSlice';
 const ProductDesc = () => {
+   const dispatch = useDispatch(); 
   const[productData, setProductData] = useState({
       title: '',
       desc: '', 
@@ -18,12 +21,13 @@ const ProductDesc = () => {
   const location = useLocation(); 
   const id = location.pathname.split("/")[2]; 
    const handleAdd = async(id)=>{
-    console.log(id); 
+  
      const data = await axios.post(`/cart/addProduct`, {
        productId: id, 
        quantity:1
      })
-     console.log(data); 
+     dispatch(addProduct(1)); 
+     
 
    }
     

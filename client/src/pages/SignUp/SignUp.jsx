@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { setToken } from '../../redux/authSlice';
 import { useNavigate } from "react-router-dom";
+import { addUser } from "../../redux/userSlice";
 import {toast} from "react-toastify"; 
 const options = [
     { value: 'male', label: 'Male' },
@@ -68,6 +69,7 @@ const SignUp = () => {
           if(response.data.status==200){
              localStorage.setItem('token', response.data.token); 
              dispatch(setToken(response.data.token)); 
+             dispatch(addUser(response.data.user)); 
              console.log("Successful"); 
              navigate("/"); 
 
