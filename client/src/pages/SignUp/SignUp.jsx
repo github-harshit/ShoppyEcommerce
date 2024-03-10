@@ -67,7 +67,9 @@ const SignUp = () => {
       }).then((response)=>{
         if(response.status===200){
           if(response.data.status==200){
-             localStorage.setItem('token', response.data.token); 
+             localStorage.setItem('token', response.data.token);
+             const userObj = JSON.stringify(response.data.user ) 
+             localStorage.setItem('user',userObj) 
              dispatch(setToken(response.data.token)); 
              dispatch(addUser(response.data.user)); 
              console.log("Successful"); 

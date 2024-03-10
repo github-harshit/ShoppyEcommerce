@@ -1,4 +1,4 @@
-import React, {useState} from 'react'; 
+import React, {useEffect, useState} from 'react'; 
 import { useSelector, useDispatch } from "react-redux"; 
 import { removeToken } from "../../redux/authSlice";
 import search from "../../assets/images/search.png"; 
@@ -10,13 +10,27 @@ import { FaUser } from "react-icons/fa6";
 import {Badge} from "@mui/material";
  import { Link } from 'react-router-dom';
 import { removeUser } from '../../redux/userSlice';
+import { setInitialValue } from '../../redux/cartSlice';
+import axios from "../../utils/api/axios"
  
 const Navbar = () => {
    const dispatch = useDispatch(); 
    const [anchorEl, setAnchorEl] = useState(); 
-    
+   const user = useSelector((state)=> state.user.user);
    const cartValue = useSelector((state)=> state.cart.cartValue);
-   console.log("cartValue", cartValue)
+   useEffect(()=>{
+    const getProducts = async()=>{
+      const res = await axios.get(`/cart/${user._id}`);
+      let arr  = res?.data?.cart?.items; 
+      let x = 0;
+      for(let i =0; i<arr.length; i++){
+      x= x+ arr[i].quantity
+      }
+      dispatch(setInitialValue(x))
+      }
+      getProducts();
+   }, [])
+  
       const handleClick = (event) => {
        setAnchorEl(event.currentTarget);
      };

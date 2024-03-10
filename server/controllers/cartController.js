@@ -72,8 +72,31 @@ const removeProduct = async(req, res)=>{
    }
 
 }
+const updateProduct = async(req, res)=>{
+     const {quantity} = req.body;
+     const productId = req.params.id; 
+     try{
+       let cart = await Cart.findOne({userId: req.user});
+       const existingItem = cart.items.find(item => item.product.toString() === productId);
+       existingItem.quantity = quantity; 
+       await cart.save(); 
+       return res.json({
+          status:201, 
+          msg: "cart updated successfully",
+           cart: cart
+       })
+     }catch(err){
+      const errMsg = err.toString(); 
+      return res.json({
+         status: 501, 
+         msg: errMsg
+      })
+       
+     }
+}
 module.exports = {
      addProduct, 
      getAllProducts, 
-     removeProduct
+     removeProduct, 
+     updateProduct
 }
