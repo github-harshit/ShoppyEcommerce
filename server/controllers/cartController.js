@@ -94,6 +94,7 @@ const updateProduct = async(req, res)=>{
        
      }
 }
+
 module.exports = {
      addProduct, 
      getAllProducts, 

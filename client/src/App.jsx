@@ -7,7 +7,8 @@ import Home from "./pages/Home/Home";
 import Products from "./pages/Products/Products";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import {ToastContainer} from "react-toastify"; 
- 
+ import Success from "./pages/Payment/Success/Success";
+ import Failure from "./pages/Payment/Failure/Failure";
 import 'react-toastify/dist/ReactToastify.css';
 import ProductDesc from "./pages/ProductDesc/ProductDesc";
 function App() {
@@ -24,6 +25,10 @@ function App() {
             <Route path="/categories/:category" element = {<Products/>}></Route>
             <Route path="/products/:productId" element= {<ProductDesc/>}/>
             <Route path="/cart" element= {<Cart/>}/>
+         </Route>
+         <Route path="/payment">
+          <Route path="success" element={<Success/>} ></Route>
+          <Route path="failure" element= {<Failure/>}></Route>
          </Route>
        </Routes>
        <ToastContainer/> 
