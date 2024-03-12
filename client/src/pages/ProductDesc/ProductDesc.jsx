@@ -41,16 +41,16 @@ const ProductDesc = () => {
       getProductData(); 
   }, [])
   return (
-    <div className='flex gap-5 py-10'> 
-      <div className='w-[60%]'>
-        <div className='w-[80%] h-[80vh] mx-auto'>
+    <div className='flex flex-col md:flex-row gap-5 py-10 border border-black w-full '> 
+      <div className='w-[100%] md:w-[60%]'>
+        <div className='w-[80%]  h-[80vh] mx-auto '>
           <img className='w-full h-full object-contain' src={productData.img}/>
         </div>
       </div>
-      <div className='w-[40%] flex flex-col gap-5'>
+      <div className='w-[100%] md:w-[40%] flex flex-col max-md:items-center gap-5'>
          <h1 className='font-bold text-3xl'>{productData.title}</h1>
-         <h2 className='font-semibold text-2xl' >{productData.desc}</h2>
-         <h3 className='font-semibold'>Rs {productData.price}</h3>
+         <h2 className='font-semibold text-xl' >{productData.desc}</h2>
+         <h3 className='font-semibold text-2xl'>Rs {productData.price}</h3>
          <div className='flex flex-col gap-2'>
            <h3> Select Size</h3> 
            <div className='flex gap-4'>

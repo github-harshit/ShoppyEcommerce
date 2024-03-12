@@ -20,17 +20,23 @@ const Products = () => {
    
     
   return (
-    <div className='flex flex-col gap-5'>
+    <div className='flex flex-col gap-5 py-10'>
+      <div className='px-10 mb-3'>
+         <h1 className='text-2xl font-bold '> {location} Collections </h1>
+      </div>
+     
       <div className='flex  items-center flex-wrap gap-10 px-10'>
         {products.map((product, index)=>
-         <Link key={index} to = {`/products/${product._id}`}><div className='w-[20rem] h-[26rem] flex flex-col items-center border border-black'> 
-            <div className='w-full h-[20rem]'> 
+         <Link key={index} to = {`/products/${product._id}`}><div className='w-[20rem] h-[20rem] flex flex-col items-center bg-violet-50 hover:opacity-90 '> 
+            <div className='w-full h-[15rem] '> 
             <img src={product.img} className='w-full h-full object-contain' />
             </div>
-            
-            <h4>{product.title}</h4>
+            <div className='w-full flex flex-col items-center'>
+                 <h4>{product.title}</h4>
             <p> {product.desc}</p>
             <h3 className='font-bold'>{product.price} Rs</h3>
+            </div>
+         
 
          </div></Link>
 
